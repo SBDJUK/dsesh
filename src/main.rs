@@ -30,7 +30,7 @@ fn sesh_config_path() -> Option<PathBuf> {
 
 fn print_help() {
     println!(
-        "\n\x1b[1mdsesh v1.0\x1b[0m  13/01/2026  Scott Bye\n\
+        "\n\x1b[1mdsesh v1.0\x1b[0m  13/01/2026  SBDJ\n\
          \ndsesh is a terminal session manager designed to be compatible with Sesh TOML configurations.\n\
          \nUSAGE:\n  \x1b[32mdsesh [command]\x1b[0m\n\
          \nCOMMANDS:\n  \x1b[33mconnect\x1b[0m    Connect to the given session\n  \x1b[33mlist\x1b[0m       List sessions\n"
