@@ -37,7 +37,6 @@ cargo build --release
 
 ## Usage
 
-```dsesh connect "$(dsesh list | fzf)"
-```
+```dsesh connect "$(dsesh list | fzf)"```
 
 I use a short alias `sc` to make this easier to use.
