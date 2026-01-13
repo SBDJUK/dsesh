@@ -43,4 +43,4 @@ or
 
 ```dsesh connect "Session Name"```
 
-I use a short alias `sc` to make the fzf version easier to use.
+I use a short alias to make the fzf version easier to use.
