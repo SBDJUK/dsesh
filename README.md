@@ -39,4 +39,8 @@ cargo build --release
 
 ```dsesh connect "$(dsesh list | fzf)"```
 
-I use a short alias `sc` to make this easier to use.
+or
+
+```dsesh connect "Session Name"```
+
+I use a short alias `sc` to make the fzf version easier to use.
