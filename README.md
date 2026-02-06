@@ -16,14 +16,13 @@ I liked the idea of preconfigured sessions with TOML files, but I didn’t alway
 - Fully compatible with Sesh TOML session files
 - Recursive imports supported
 - Launches commands directly in the current terminal (no tmux)
-- Simple CLI with two commands: `list` and `connect`
 - Works with fzf for interactive session selection
+- Simple CLI with two commands: `list` and `connect`
+- `list` command supports an optional filter
 
 ---
 
-## Installation
-
-### Build from source
+## Building
 
 Requires Rust and Cargo:
 
@@ -35,9 +34,18 @@ cargo build --release
 
 ---
 
+## Installation
+
+```cargo install --path .
+```
+
+---
+
 ## Usage
 
-```dsesh connect "$(dsesh list | fzf)"```
+I personally use
+
+```dsesh connect "$(dsesh list $1 | fzf)"```
 
 or
 

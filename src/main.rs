@@ -30,7 +30,7 @@ fn sesh_config_path() -> Option<PathBuf> {
 
 fn print_help() {
     println!(
-        "\n\x1b[1mdsesh v1.0\x1b[0m  13/01/2026  SBDJ\n\
+        "\n\x1b[1mdsesh v1.1\x1b[0m  06/02/2026  SBDJ\n\
          \ndsesh is a terminal session manager designed to be compatible with Sesh TOML configurations.\n\
          \nUSAGE:\n  \x1b[32mdsesh [command]\x1b[0m\n\
          \nCOMMANDS:\n  \x1b[33mconnect\x1b[0m    Connect to the given session\n  \x1b[33mlist\x1b[0m       List sessions\n"
@@ -94,8 +94,13 @@ fn load_all_sessions(path: impl AsRef<Path>) -> anyhow::Result<Vec<Session>> {
     load_config_recursive(path.as_ref(), &mut visited)
 }
 
-fn list_sessions(sessions: &[Session]) {
+fn list_sessions(sessions: &[Session], filter: Option<&str>) {
     for s in sessions {
+        if let Some(f) = filter {
+            if !s.name.contains(f) {
+                continue;
+            }
+        }
         println!("{}", s.name);
     }
 }
@@ -132,7 +137,8 @@ fn main() -> anyhow::Result<()> {
 
     match args.next().as_deref() {
         Some("list") => {
-            list_sessions(&sessions);
+            let filter = args.next();
+            list_sessions(&sessions, filter.as_deref());
         }
         Some("connect") => {
             let name = args
