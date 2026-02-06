@@ -97,7 +97,7 @@ fn load_all_sessions(path: impl AsRef<Path>) -> anyhow::Result<Vec<Session>> {
 fn list_sessions(sessions: &[Session], filter: Option<&str>) {
     for s in sessions {
         if let Some(f) = filter {
-            if !s.name.contains(f) {
+            if !s.name.to_lowercase().contains(&f.to_lowercase()) {
                 continue;
             }
         }
