@@ -30,7 +30,7 @@ fn sesh_config_path() -> Option<PathBuf> {
 
 fn print_help() {
     println!(
-        "\n\x1b[1mdsesh v1.1\x1b[0m  06/02/2026  SBDJ\n\
+        "\n\x1b[1mdsesh v1.2\x1b[0m  17/02/2026  SBDJ\n\
          \ndsesh is a terminal session manager designed to be compatible with Sesh TOML configurations.\n\
          \nUSAGE:\n  \x1b[32mdsesh [command]\x1b[0m\n\
          \nCOMMANDS:\n  \x1b[33mconnect\x1b[0m    Connect to the given session\n  \x1b[33mlist\x1b[0m       List sessions\n"
@@ -95,13 +95,18 @@ fn load_all_sessions(path: impl AsRef<Path>) -> anyhow::Result<Vec<Session>> {
 }
 
 fn list_sessions(sessions: &[Session], filter: Option<&str>) {
+    let mut found = false;
     for s in sessions {
         if let Some(f) = filter {
             if !s.name.to_lowercase().contains(&f.to_lowercase()) {
                 continue;
             }
         }
+        found = true;
         println!("{}", s.name);
+    }
+    if !found {
+        println!("❌ No matching sessions found")
     }
 }
 
@@ -145,7 +150,7 @@ fn main() -> anyhow::Result<()> {
                 .next()
                 .ok_or_else(|| anyhow::anyhow!("connect requires a session name"))?;
 
-            if name == "" {
+            if name == "" || name == "❌ No matching sessions found"{
                 return Ok(())
             }
 
